@@ -1,26 +1,50 @@
 @import "tailwindcss";
+@import "@heroui/styles"; 
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@custom-variant dark (&:is(.dark *));
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--background);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
+
+:root,
+[data-theme="light"] {
+  --background: #f4fbf2;
+  --foreground: #161d18;
+  --surface: #ffffff;
+  --overlay: #ffffff;
+  --default: #f0f6ee;
+  --muted: #526055;
+  --separator: #e2e9e1;
+  --accent: #516600;
+  --accent-foreground: #ffffff;
+  --success: #336943;
+  --success-foreground: #ffffff;
+}
+
+.dark,
+[data-theme="dark"] {
+  --background: #0e1510;
+  --foreground: #dde5dc;
+  --surface: #161d18;
+  --overlay: #242c26;
+  --default: #1a211c;
+  --muted: #c5c9ad;
+  --separator: #2f3731;
+  --accent: #c8f322;
+  --accent-foreground: #293500;
+  --success: #94de2d;
+  --success-foreground: #1f3700;
+}
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-label: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
