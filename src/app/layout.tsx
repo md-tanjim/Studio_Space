@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Figtree } from "next/font/google";
   import { ToastContainer} from 'react-toastify';
 import "./globals.css";
 import Navbar from "@/components/home/Navbar";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import Footer from "@/components/home/Footer";
+import { cn } from "@/lib/utils";
+
+const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
@@ -29,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       // className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      className={`${jakarta.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", jakarta.variable, geistMono.variable, "font-sans", figtree.variable)}
     >
       <body className="min-h-full flex flex-col">
      <ThemeProvider>
@@ -37,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
      {children}
    
+    <Footer></Footer>
       </ThemeProvider>   
         
       </body>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MdArrowForward, MdLocationOn, MdStar } from "react-icons/md";
 
 type StudioData = {
+  _id: string
   sid: string;
   title: string;
   category: string;
@@ -21,6 +22,7 @@ type StudioCardProps = {
 
 export default function StudioCard({ roomData }: StudioCardProps) {
   return (
+     <Link href={`/explore-studios/${roomData._id}`}>
     <div className="group overflow-hidden rounded-2xl border border-separator bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-transparent dark:bg-[#161e18]">
 
       <div className="relative aspect-[1.6/1] overflow-hidden">
@@ -83,7 +85,7 @@ export default function StudioCard({ roomData }: StudioCardProps) {
           </div>
 
           <Link
-            href={`/studios/${roomData.sid}`}
+            href={`/explore-studios/${roomData._id}`}
             className="inline-flex items-center justify-center gap-1 rounded-full border border-success/15 bg-success/5 px-6 py-3 text-xs font-bold text-foreground transition-all duration-300 hover:bg-success hover:text-white dark:border-transparent dark:bg-[#242e27] dark:hover:bg-success"
           >
             View Details
@@ -93,5 +95,6 @@ export default function StudioCard({ roomData }: StudioCardProps) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }

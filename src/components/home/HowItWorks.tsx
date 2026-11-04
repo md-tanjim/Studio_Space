@@ -42,7 +42,7 @@ const steps = [
 
 const HowItWorks = () => {
     return (
-        <section className="bg-background px-4 py-10 text-foreground sm:px-6 lg:px-8">
+        <section id="howitworks" className="bg-background px-4 py-10 text-foreground sm:px-6 lg:px-8">
             <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-3xl border border-separator bg-surface px-6 py-16 sm:px-10 lg:px-16 lg:py-16">
 
                 {/* Top-left gradient glow */}
@@ -113,7 +113,7 @@ const HowItWorks = () => {
 
 
         {/* Trust & Protection Section */}
-<section className="bg-background px-5 py-20 text-foreground transition-colors duration-300 sm:px-8 lg:py-24">
+<section id="aboutus" className="bg-background px-5 py-20 text-foreground transition-colors duration-300 sm:px-8 lg:py-24">
   <div className="mx-auto max-w-[1340px]">
 
     {/* Section Heading */}

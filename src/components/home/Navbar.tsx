@@ -33,8 +33,8 @@ import { toast } from "react-toastify";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Explore Studios", href: "/explore-studios" },
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "About Us", href: "/about-us" },
+  { label: "How It Works", href: "/#howitworks" },
+  { label: "About Us", href: "/#aboutus" },
 ];
 
 const accountLinks = [

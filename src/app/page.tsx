@@ -17,7 +17,7 @@ export default function Home() {
       <FeaturedSection></FeaturedSection>
       <BrowseCategories></BrowseCategories>
       <HowItWorks></HowItWorks>
-      <Footer></Footer>
+
     </div>
   );
 }

@@ -45,10 +45,9 @@ const Footer= ()=> {
     <footer className="border-t border-separator bg-surface text-foreground transition-colors duration-300">
       <div className="mx-auto max-w-[1400px] px-5 pt-14 sm:px-8 lg:pt-16">
 
-        {/* Main Footer */}
+  
         <div className="grid grid-cols-1 gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_0.75fr_0.75fr_1.6fr] lg:gap-12">
 
-          {/* Brand */}
           <div>
             <Link href="/" className="mb-4 inline-flex items-center gap-2.5">
               <span className="flex size-8 items-center justify-center rounded-full border border-success/20 bg-success/10 text-success">
@@ -78,7 +77,6 @@ const Footer= ()=> {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="mb-5 text-[11px] font-bold uppercase tracking-wide">
               Quick Links
@@ -98,7 +96,7 @@ const Footer= ()=> {
             </ul>
           </div>
 
-          {/* Categories */}
+
           <div>
             <h4 className="mb-5 text-[11px] font-bold uppercase tracking-wide">
               Categories
@@ -118,7 +116,6 @@ const Footer= ()=> {
             </ul>
           </div>
 
-          {/* Newsletter & Socials */}
           <div>
             <h4 className="mb-5 text-[11px] font-bold uppercase tracking-wide">
               Stay in the Loop
@@ -129,7 +126,7 @@ const Footer= ()=> {
               creator residency announcements.
             </p>
 
-            {/* Newsletter Form */}
+
             <form
               className="flex flex-col gap-2 sm:flex-row"
               onSubmit={(e) => e.preventDefault()}
@@ -149,7 +146,6 @@ const Footer= ()=> {
               </button>
             </form>
 
-            {/* Social Links */}
             <div className="mt-6 flex items-center gap-3">
               {socialLinks.map(({ label, href, Icon }) => (
                 <Link
@@ -167,7 +163,7 @@ const Footer= ()=> {
           </div>
         </div>
 
-        {/* Bottom Footer */}
+
         <div className="flex flex-col gap-5 border-t border-separator py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-muted">
             © 2025 StudioSpace Inc. All rights reserved.

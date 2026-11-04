@@ -1,4 +1,5 @@
 
+import { IStudio } from "@/Types/rooms";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -67,7 +68,7 @@ export default async function BrowseCategories() {
 
 
   const categoryCounts = roomsData.reduce(
-    (counts, room) => {
+    (counts : Record<string, number>, room : IStudio) => {
       const category = room.category.toLowerCase();
       counts[category] = (counts[category] || 0) + 1;
       return counts;
