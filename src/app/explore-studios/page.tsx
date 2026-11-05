@@ -9,7 +9,7 @@ import {
 } from "react-icons/md";
 import { IStudio } from "@/Types/rooms";
 import StudioCard from "@/components/home/FeaturedSecCards";
-import StudioResults from "@/components/StudioResultsPerPage";
+import StudioResults from "@/components/studioDetailsPageComponents/StudioResultsPerPage";
 
 const ExploreStudios = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-rooms`);

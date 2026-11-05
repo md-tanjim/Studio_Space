@@ -5,7 +5,7 @@ import { IStudio } from "@/Types/rooms";
 import { useState } from "react";
 
 import { MdChevronLeft, MdChevronRight, MdKeyboardArrowDown, MdLocationOn } from "react-icons/md";
-import StudioCard from "./home/FeaturedSecCards";
+import StudioCard from "../home/FeaturedSecCards";
 import Link from "next/link";
 
 interface StudioResultsProps {
