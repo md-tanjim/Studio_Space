@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -22,6 +22,11 @@ const SignInTemplate = () => {
   const [loading, setLoading] = useState(false);
   const { refetch } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+  const registerUrl = callbackUrl
+  ? `/register?callbackUrl=${encodeURIComponent(callbackUrl)}`
+  : "/register";
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,8 +56,21 @@ const SignInTemplate = () => {
       }
 
       toast.success("Signed in successfully!");
-      await refetch();
-      router.push("/");
+      
+      
+      
+
+const safeCallbackUrl =
+  callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")
+    ? callbackUrl
+    : "/";
+
+await refetch();
+
+window.location.href = safeCallbackUrl;
+
+
+
     } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {
@@ -236,7 +254,7 @@ const SignInTemplate = () => {
           <p className="mt-6 text-center text-xs text-[#657168] dark:text-[#a5b0a5]">
             Don&apos;t have an account?{" "}
             <Link
-              href="/signup"
+              href={registerUrl}
               className="font-semibold text-[#426d43] transition hover:text-[#769d12] dark:text-[#c8f322]"
             >
               Register ↗

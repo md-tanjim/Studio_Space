@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -25,6 +25,7 @@ const SignUpTemplate = () => {
 
   const { refetch } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -95,8 +96,19 @@ const SignUpTemplate = () => {
 
       toast.success("Account created successfully!");
 
-      await refetch();
-      router.push("/");
+      const callbackUrl = searchParams.get("callbackUrl");
+
+const safeCallbackUrl =
+  callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")
+    ? callbackUrl
+    : "/";
+
+await refetch();
+
+window.location.href = safeCallbackUrl;
+
+
+
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong. Please try again.");

@@ -18,6 +18,7 @@
 import StudioHost from "@/components/studioDetailsPageComponents/StudioHost";
 import StudioReviews from "@/components/studioDetailsPageComponents/StudioReviews";
 import BookWorkplaceNow from "@/components/studioDetailsPageComponents/BookWorkplacaNow";
+import { notFound } from "next/navigation";
 
     interface ExploreDetailedStudiosProps {
     params: Promise<{ id: string }>;
@@ -32,7 +33,7 @@ import BookWorkplaceNow from "@/components/studioDetailsPageComponents/BookWorkp
     );
 
     if (!res.ok) {
-    throw new Error("Failed to fetch studio details");
+    notFound();
     }
 
     const roomData: IStudio = await res.json();
@@ -175,7 +176,7 @@ import BookWorkplaceNow from "@/components/studioDetailsPageComponents/BookWorkp
 
             {/* Right Side - Booking Component Placeholder */}
             <aside className="lg:sticky lg:top-24">
-                <div className="flex min-h-[400px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-separator bg-surface p-6 text-center">
+                <div className="flex  flex-col items-center justify-center  text-center">
                     {/* <MdVerified size={35} className="text-muted" />
 
                     <h2 className="mt-3 font-label text-lg font-bold">
