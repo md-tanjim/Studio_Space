@@ -1,8 +1,10 @@
 import MyBookingCards from "@/components/myBookingsPageComponents/MyBookingCards";
 import MyBookingTabs from "@/components/myBookingsPageComponents/MyBookingTabs";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 import { IStudio } from "@/Types/rooms";
 import Link from "next/link";
 
+export const instant = false;
 
 export interface IMyBookingsPage extends IStudio {
     // _id: string;
@@ -16,10 +18,20 @@ export interface IMyBookingsPage extends IStudio {
     bookingDate: string;
 }
 
+
+
 const MyBookingsPage = async () => {
+
+
+    const token = await getTokenFromServer();
+
+
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/my-bookings`,
-        { cache: "no-store" }
+        `${process.env.NEXT_PUBLIC_API_URL}/my-bookings`,{
+            headers: {
+                authorization: `Bearer ${token}`,
+            }
+        }
     );
 
     if (!res.ok) {

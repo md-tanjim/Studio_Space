@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -137,6 +137,7 @@ window.location.href = safeCallbackUrl;
   };
 
   return (
+   
     <main className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-[#f4fbf2] px-4 py-8 dark:bg-[#0e1510]">
       <div className="relative w-full max-w-[470px] overflow-hidden rounded-xl border border-[#e8eee6] bg-white px-7 py-10 shadow-sm sm:px-12 sm:py-12 dark:border-[#2f3731] dark:bg-[#161d18]">
 
@@ -360,6 +361,7 @@ window.location.href = safeCallbackUrl;
         </div>
       </div>
     </main>
+   
   );
 };
 

@@ -20,6 +20,11 @@ import StudioReviews from "@/components/studioDetailsPageComponents/StudioReview
 import BookWorkplaceNow from "@/components/studioDetailsPageComponents/BookWorkplacaNow";
 import { notFound } from "next/navigation";
 
+
+
+
+
+
     interface ExploreDetailedStudiosProps {
     params: Promise<{ id: string }>;
     }

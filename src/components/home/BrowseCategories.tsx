@@ -62,6 +62,7 @@ const categories = [
 
 export default async function BrowseCategories() {
   
+  //limit 6
      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-rooms`);
     const roomsData = await res.json();
     console.log(roomsData,"rooms data from Featured section");

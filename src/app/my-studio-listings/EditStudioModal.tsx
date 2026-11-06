@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { MdClose, MdSave } from "react-icons/md";
 import { IStudio } from "@/Types/rooms";
 import StudioForm, { StudioFormData } from "@/components/studio/StudioForm";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 interface EditStudioModalProps {
   studio: IStudio;
@@ -91,6 +92,8 @@ const EditStudioModal = ({ studio, onClose }: EditStudioModalProps) => {
 
     setIsSaving(true);
 
+    const token = await getTokenFromClient();
+
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/my-listings/${studio._id}`,
@@ -98,6 +101,7 @@ const EditStudioModal = ({ studio, onClose }: EditStudioModalProps) => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(updatedData),
         }

@@ -10,6 +10,7 @@
     import { IStudio } from "@/Types/rooms";
     import { useRouter } from "next/navigation";
     import { toast } from "react-toastify";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 
     const getToday = () => {
@@ -78,11 +79,14 @@
     bookingDate: new Date(),
     };
 
+    const token = await getTokenFromClient();
+
     try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(bookingData),
     }

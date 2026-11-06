@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -17,16 +17,19 @@ import {
 
 import { authClient, useSession } from "@/lib/auth-client";
 
-const SignInTemplate = () => {
+const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const { refetch } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const callbackUrl = searchParams.get("callbackUrl");
+
   const registerUrl = callbackUrl
-  ? `/register?callbackUrl=${encodeURIComponent(callbackUrl)}`
-  : "/register";
+    ? `/register?callbackUrl=${encodeURIComponent(callbackUrl)}`
+    : "/register";
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,21 +59,15 @@ const SignInTemplate = () => {
       }
 
       toast.success("Signed in successfully!");
-      
-      
-      
 
-const safeCallbackUrl =
-  callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")
-    ? callbackUrl
-    : "/";
+      const safeCallbackUrl =
+        callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")
+          ? callbackUrl
+          : "/";
 
-await refetch();
+      await refetch();
 
-window.location.href = safeCallbackUrl;
-
-
-
+      window.location.href = safeCallbackUrl;
     } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {
@@ -99,13 +96,9 @@ window.location.href = safeCallbackUrl;
   return (
     <main className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-[#f4fbf2] px-4 py-10 dark:bg-[#0e1510]">
       <div className="relative w-full max-w-[410px] overflow-hidden rounded-xl border border-[#e8eee6] bg-white px-7 py-10 shadow-sm sm:px-12 sm:py-12 dark:border-[#2f3731] dark:bg-[#161d18]">
-
-       
         <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full bg-[#c8f322]/10 blur-3xl dark:bg-[#c8f322]/[0.08]" />
 
         <div className="relative">
-
-       
           <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-[#eef6ee] px-3 py-1 dark:bg-[#243027]">
             <span className="size-2 rounded-full bg-[#c8f322]" />
             <span className="font-label text-[9px] font-bold tracking-wider text-[#456344] dark:text-[#c8f322]">
@@ -113,7 +106,6 @@ window.location.href = safeCallbackUrl;
             </span>
           </div>
 
-         
           <h1 className="text-[36px] font-bold leading-tight tracking-tight text-[#161d18] sm:text-[38px] dark:text-[#dde5dc]">
             Welcome Back
           </h1>
@@ -123,10 +115,7 @@ window.location.href = safeCallbackUrl;
             artist community.
           </p>
 
-       
           <form onSubmit={onSubmit} className="mt-7 space-y-4">
-
-            
             <div>
               <div className="mb-1.5 flex items-center justify-between">
                 <label
@@ -156,7 +145,6 @@ window.location.href = safeCallbackUrl;
               </div>
             </div>
 
-        
             <div>
               <div className="mb-1.5 flex items-center justify-between">
                 <label
@@ -202,7 +190,6 @@ window.location.href = safeCallbackUrl;
               </div>
             </div>
 
-        
             <div className="flex flex-wrap items-center justify-between gap-2 pt-0.5">
               <label className="flex cursor-pointer items-center gap-2 text-[10px] text-[#526055] dark:text-[#b5c0b5]">
                 <input
@@ -219,7 +206,6 @@ window.location.href = safeCallbackUrl;
               </div>
             </div>
 
-      
             <button
               type="submit"
               disabled={loading}
@@ -229,7 +215,6 @@ window.location.href = safeCallbackUrl;
               {!loading && <MdArrowForward className="size-[17px]" />}
             </button>
 
-        
             <div className="flex items-center gap-3 py-0.5">
               <div className="h-px flex-1 bg-[#e4ebe3] dark:bg-[#303b32]" />
               <span className="text-[9px] font-bold tracking-widest text-[#526055] dark:text-[#a5b0a5]">
@@ -238,7 +223,6 @@ window.location.href = safeCallbackUrl;
               <div className="h-px flex-1 bg-[#e4ebe3] dark:bg-[#303b32]" />
             </div>
 
-         
             <button
               type="button"
               onClick={handleSocialSignIn}
@@ -247,10 +231,8 @@ window.location.href = safeCallbackUrl;
               <FcGoogle className="size-[17px]" />
               Continue with Google
             </button>
-
           </form>
 
-        
           <p className="mt-6 text-center text-xs text-[#657168] dark:text-[#a5b0a5]">
             Don&apos;t have an account?{" "}
             <Link
@@ -260,11 +242,10 @@ window.location.href = safeCallbackUrl;
               Register ↗
             </Link>
           </p>
-
         </div>
       </div>
     </main>
   );
 };
 
-export default SignInTemplate;
+export default SignInForm

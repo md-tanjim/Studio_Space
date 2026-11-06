@@ -26,3 +26,21 @@ export interface IStudio {
     comment: string;
   }[];
 }
+
+
+export interface IMyStudioDetails {
+  _id: string;
+  title: string;
+  category: string;
+  region: string;
+  location: string;
+  description: string;
+  hourlyRate: number;
+  securityDeposit: number;
+  maxCapacity: number;
+  images: string[];
+  amenities: string[];
+  userName: string;
+  userEmail: string;
+  createdAt: string;
+}

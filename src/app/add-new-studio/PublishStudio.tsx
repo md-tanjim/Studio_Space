@@ -11,6 +11,7 @@ import {
 } from "react-icons/md";
 import { useSession } from "@/lib/auth-client";
 import { StudioFormData } from "@/components/studio/StudioForm";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 type AddStudioFormData = Pick<
   IStudio,
@@ -106,12 +107,15 @@ const userEmail = session?.user?.email;
   createdAt: new Date().toISOString(),
 };
 
+
+  const token = await getTokenFromClient();
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/add-listings`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(myListingData),
         }

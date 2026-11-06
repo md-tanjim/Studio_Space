@@ -16,6 +16,7 @@ import {
 import { MyStudioListing } from "./page";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 interface MyStudioCardProps {
   studio: MyStudioListing;
@@ -31,8 +32,13 @@ const MyStudioCard = ({ studio }: MyStudioCardProps) => {
 
  const router = useRouter();
   const handleDeleteBooking = async()=>{
+
+    const token = await getTokenFromClient();
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${studio._id}`,{
             method: 'DELETE',
+            headers:{
+              authorization: `Bearer ${token}`,
+            }
             
         });
         const data = await res.json();
@@ -147,6 +153,7 @@ const MyStudioCard = ({ studio }: MyStudioCardProps) => {
           <button
             type="button"
             title="Delete studio"
+            onClick={handleDeleteBooking}
             aria-label={`Delete ${studio.title}`}
             className="flex size-10 items-center justify-center rounded-xl bg-danger/10 text-danger transition hover:bg-danger/20"
           >
@@ -154,7 +161,7 @@ const MyStudioCard = ({ studio }: MyStudioCardProps) => {
           </button>
 
           <Link
-            href={`/studios/${studio.sid}`}
+            href={`/my-studio-listings/${studio.userEmail}`}
             title="View studio"
             aria-label={`View ${studio.title}`}
             className="flex size-10 items-center justify-center rounded-xl bg-default text-muted transition hover:bg-accent/10 hover:text-foreground"

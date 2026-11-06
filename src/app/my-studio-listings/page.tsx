@@ -14,6 +14,7 @@ import {
   MdHome,
 } from "react-icons/md";
 import MyStudioCard from "./MyStudioCard";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
 export interface MyStudioListing extends IStudio {
   userName: string;
@@ -33,10 +34,16 @@ const MyStudioListings = async () => {
   }
 
   // Fetch user's studio listings
+
+  const token = await getTokenFromServer();
+
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/my-listings/${encodeURIComponent(user.email)}`,
     {
       cache: "no-store",
+      headers:{
+        authorization: `Bearer ${token}`,
+      }
     }
   );
 

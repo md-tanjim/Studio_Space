@@ -20,6 +20,19 @@ const ExploreStudios = async () => {
 
   const roomsData: IStudio[] = await res.json();
 
+
+  // const res2 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings`);
+  //   if (!res2.ok) {
+  //   throw new Error("Failed to fetch studios");
+  // }
+
+  // const roomsData2: IStudio[] = await res2.json();
+
+  // const finalAllData = [...roomsData, ...roomsData2];
+
+
+
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <section className="mx-auto max-w-[1440px] px-5 py-8 md:px-8 lg:px-12">

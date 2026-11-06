@@ -58,7 +58,7 @@ export default function NotFound() {
         </h2>
 
         <p className="mt-3 max-w-[440px] text-sm leading-6 text-muted sm:text-base">
-          We couldn't find the creative space you're looking for. It may
+          We couldnt find the creative space you're looking for. It may
           have been moved, removed, or the link might be incorrect.
         </p>
 

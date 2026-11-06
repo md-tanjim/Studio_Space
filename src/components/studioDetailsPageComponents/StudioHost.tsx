@@ -11,7 +11,7 @@ interface StudioHostProps {
 }
 
 const StudioHost = ({ host }: StudioHostProps) => {
-  const hasImage = Boolean(host.image?.trim());
+  const hasImage = Boolean(host?.image?.trim());
 
   return (
     <section className="rounded-2xl border border-separator bg-surface p-5 sm:p-7">
@@ -26,14 +26,14 @@ const StudioHost = ({ host }: StudioHostProps) => {
             {hasImage ? (
               <Image
                 src={host.image!}
-                alt={host.name}
+                alt={host?.name}
                 fill
                 sizes="64px"
                 className="object-cover"
               />
             ) : (
               <span className="font-label text-2xl font-bold">
-                {host.name?.charAt(0).toUpperCase() || <MdPersonOutline size={30} />}
+                {host?.name?.charAt(0).toUpperCase() || <MdPersonOutline size={30} />}
               </span>
             )}
           </div>
@@ -41,10 +41,10 @@ const StudioHost = ({ host }: StudioHostProps) => {
       
           <div>
             <h3 className="font-label text-base font-bold">
-              {host.name}
+              {host?.name}
             </h3>
 
-            {host.verified && (
+            {host?.verified && (
               <div className="mt-1 flex items-center gap-1.5 text-xs font-semibold text-success">
                 <MdVerified size={16} />
                 Verified Host

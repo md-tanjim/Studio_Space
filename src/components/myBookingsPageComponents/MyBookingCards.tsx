@@ -13,6 +13,7 @@ import {
 import { IMyBookingsPage } from "@/app/my-bookings/page";
 import { useRouter } from "next/navigation";
 import BookingReceiptModal from "./BookingReceiptModal";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const MyBookingCards = ({bookingData,}: {bookingData: IMyBookingsPage}) => {
   const {
@@ -64,8 +65,14 @@ const MyBookingCards = ({bookingData,}: {bookingData: IMyBookingsPage}) => {
 
   const router = useRouter();
   const handleDeleteBooking = async()=>{
+
+        const token = await getTokenFromClient();
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-bookings/${bookingData._id}`,{
             method: 'DELETE',
+            headers:{
+              authorization: `Bearer ${token}`,
+            }
+
             
         });
         const data = await res.json();
