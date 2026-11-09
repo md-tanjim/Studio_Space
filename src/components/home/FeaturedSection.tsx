@@ -5,6 +5,9 @@ import { MdArrowForward } from "react-icons/md";
 import StudioCard from "./FeaturedSecCards";
 import { IStudio } from "@/Types/rooms";
 
+
+
+
 const FeaturedSection = async()=> {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/rooms`);
@@ -56,7 +59,7 @@ const FeaturedSection = async()=> {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
        
             {
-               roomsData.map((roomData : IStudio)=>{
+               roomsData.map((roomData : IStudio & {source: "rooms" | "my-listings";})=>{
                 return (
                     <StudioCard key={roomData._id} roomData={roomData}></StudioCard>
                 )
