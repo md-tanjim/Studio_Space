@@ -41,9 +41,9 @@ const MyStudioListings = async () => {
     `${process.env.NEXT_PUBLIC_API_URL}/my-listings/${user.email}`,
     {
       cache: "no-store",
-      // headers:{
-      //   authorization: `Bearer ${token}`,
-      // }
+      headers:{
+        authorization: `Bearer ${token}`,
+      }
     }
   );
 

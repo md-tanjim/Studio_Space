@@ -308,6 +308,7 @@ import BookWorkplaceNow from "@/components/studioDetailsPageComponents/BookWorkp
 import { notFound } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
 
 
@@ -329,8 +330,14 @@ import { headers } from "next/headers";
 
     const email = session?.user.email;
 
+    const token = await getTokenFromServer();
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${email}/${id}`,
-    { cache: "no-store" }
+    { cache: "no-store",
+      headers:{
+        authorization: `Bearer ${token}`,
+      }
+     }
     );
 
     if (!res.ok) {
