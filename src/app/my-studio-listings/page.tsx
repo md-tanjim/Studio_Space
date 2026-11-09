@@ -38,7 +38,7 @@ const MyStudioListings = async () => {
   const token = await getTokenFromServer();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/my-listings/${user.email}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/my-listings/user/${user.email}`,
     {
       cache: "no-store",
       headers:{

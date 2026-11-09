@@ -326,26 +326,24 @@ import { getTokenFromServer } from "@/lib/getTokenFromServer";
         headers: await headers(),
       });
 
-    console.log(id,session, "id from deltailed listings");
+    // console.log(id,session, "id from deltailed listings");
 
     const email = session?.user.email;
 
    
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${email}/${id}`,
-    { cache: "no-store",
-      
-     }
-    );
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${email}/${id}`,
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${id}`);
 
+    // console.log("okkkkkkkk")
     if (!res.ok) {
-    notFound();
+      notFound();
     }
-
+    
+    // console.log("okkkkkoookk")
     const roomData: IMyStudioDetails = await res.json();
 
     console.log(roomData, "data from detailed my listings page")
-    console.log(roomData.description, "dessssssssssssssssssssssssss")
 
 
     return (

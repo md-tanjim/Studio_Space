@@ -34,7 +34,7 @@ const MyStudioCard = ({ studio }: {studio :IMyStudioDetails}) => {
   const handleDeleteBooking = async()=>{
 
     const token = await getTokenFromClient();
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${studio._id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/delete/${studio._id}`,{
             method: 'DELETE',
             headers:{
               authorization: `Bearer ${token}`,

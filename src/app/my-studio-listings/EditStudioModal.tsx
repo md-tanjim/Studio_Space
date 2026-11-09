@@ -96,7 +96,7 @@ const EditStudioModal = ({ studio, onClose }: EditStudioModalProps) => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/my-listings/${studio._id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/my-listings/update/${studio._id}`,
         {
           method: "PATCH",
           headers: {
