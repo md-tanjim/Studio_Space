@@ -14,6 +14,7 @@ import { IMyBookingsPage } from "@/app/my-bookings/page";
 import { useRouter } from "next/navigation";
 import BookingReceiptModal from "./BookingReceiptModal";
 import { getTokenFromClient } from "@/lib/getTokenFromClient";
+import { toast } from "react-toastify";
 
 const MyBookingCards = ({bookingData,}: {bookingData: IMyBookingsPage}) => {
   const {
@@ -76,6 +77,7 @@ const MyBookingCards = ({bookingData,}: {bookingData: IMyBookingsPage}) => {
             
         });
         const data = await res.json();
+        toast.success("Successfully Deleted");
         router.refresh();
         console.log(data,"deleeeeeeted");
     }
