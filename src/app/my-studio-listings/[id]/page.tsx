@@ -330,13 +330,11 @@ import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
     const email = session?.user.email;
 
-    const token = await getTokenFromServer();
+   
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings/${email}/${id}`,
     { cache: "no-store",
-      headers:{
-        authorization: `Bearer ${token}`,
-      }
+      
      }
     );
 

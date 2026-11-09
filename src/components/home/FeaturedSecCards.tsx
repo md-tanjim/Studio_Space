@@ -46,7 +46,7 @@ export default function StudioCard({ roomData }: StudioCardProps) {
        
         <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-surface/95 px-3 py-1.5 text-xs font-bold text-foreground backdrop-blur-sm dark:bg-[#101812]/90 dark:text-white">
           <MdStar className="size-4 text-accent" />
-          {roomData?.rating.toFixed(2)}
+          {/* {roomData?.rating.toFixed(2)} */}
           <span className="font-normal text-muted">
             ({roomData.totalReviews})
           </span>
