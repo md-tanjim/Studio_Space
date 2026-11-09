@@ -206,7 +206,7 @@ return (
 
   <MdKeyboardArrowDown
     size={18}
-    className="pointer-events-none absolute right-3"
+    className="pointer-events-none absolute right-3 top-2"
   />
 </div>
 
