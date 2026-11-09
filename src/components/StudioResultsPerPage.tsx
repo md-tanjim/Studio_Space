@@ -2,26 +2,41 @@
 "use client";
 
 import { IStudio } from "@/Types/rooms";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { MdChevronLeft, MdChevronRight, MdKeyboardArrowDown, MdLocationOn } from "react-icons/md";
-import StudioCard from "../home/FeaturedSecCards";
+import StudioCard from "./home/FeaturedSecCards";
 import Link from "next/link";
 
 interface StudioResultsProps {
-roomsData: IStudio[];
+    roomsData: (IStudio & {source: "rooms" | "my-listings";})[];
+  initialCategory: string;
 }
 
 const ITEMS_PER_PAGE = 12;
 
-export default function StudioResults({ roomsData }: StudioResultsProps) {
+export default function StudioResults({
+  roomsData,
+  initialCategory,
+}: StudioResultsProps) {
 
 
+    console.log(roomsData," room data from studioResults")
 const [currentPage, setCurrentPage] = useState(1);
 const [location, setLocation] = useState("all");
 const [priceRange, setPriceRange] = useState("all");
 const [minRating, setMinRating] = useState("all");
 const [sortBy, setSortBy] = useState("default");
+const [category, setCategory] = useState(initialCategory);
+
+useEffect(() => {
+  setCategory(initialCategory);
+}, [initialCategory]);
+
+
+const categories = Array.from(
+  new Set(roomsData.map((room) => room.category).filter(Boolean))
+).sort();
 
 // Get unique locations from API data
 const locations = Array.from(
@@ -32,6 +47,9 @@ new Set(roomsData.map((room) => room.location).filter(Boolean))
 const filteredStudios = roomsData.filter((room) => {
 const matchesLocation =
 location === "all" || room.location === location;
+
+const matchesCategory =
+  category === "all" || room.category === category;
 
 let matchesPrice = true;
 
@@ -48,7 +66,9 @@ matchesPrice = room.hourlyRate > 150;
 const matchesRating =
 minRating === "all" || room.rating >= Number(minRating);
 
-return matchesLocation && matchesPrice && matchesRating;
+
+
+return matchesLocation && matchesCategory && matchesPrice && matchesRating;
 });
 //-----------------------------------------------//
 
@@ -119,11 +139,13 @@ setLocation("all");
 setPriceRange("all");
 setMinRating("all");
 setCurrentPage(1);
+setCategory("all");
 };
 
 const hasActiveFilters =
 location !== "all" ||
 priceRange !== "all" ||
+category !== "all" ||
 minRating !== "all";
 //----------------------------------//
 return (
@@ -158,6 +180,36 @@ return (
                 className="pointer-events-none absolute right-3"
             />
         </div>
+
+
+
+
+        {/* category filt */}
+        {/* Category Filter */}
+<div className="relative rounded-full bg-success/10 px-4 py-2 text-sm font-medium text-success">
+  <select
+    value={category}
+    onChange={(e) => {
+      setCategory(e.target.value);
+      setCurrentPage(1);
+    }}
+    className="max-w-[180px] cursor-pointer appearance-none bg-transparent pr-5 outline-none"
+  >
+    <option value="all">All categories</option>
+
+    {categories.map((cat) => (
+      <option key={cat} value={cat}>
+        {cat}
+      </option>
+    ))}
+  </select>
+
+  <MdKeyboardArrowDown
+    size={18}
+    className="pointer-events-none absolute right-3"
+  />
+</div>
+
 
         {/* Price Filter */}
         <div className="rounded-full bg-success/10 px-4 py-2 text-sm font-medium text-success">

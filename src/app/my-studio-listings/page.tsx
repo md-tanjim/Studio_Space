@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import React from "react";
-import { IStudio } from "@/Types/rooms";
+import { IMyStudioDetails, IStudio } from "@/Types/rooms";
 import {
   MdAdd,
   MdArrowForward,
@@ -17,8 +17,8 @@ import MyStudioCard from "./MyStudioCard";
 import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
 export interface MyStudioListing extends IStudio {
-  userName: string;
-  userEmail: string;
+userName: string;
+userEmail: string;
 }
 
 const MyStudioListings = async () => {
@@ -38,12 +38,12 @@ const MyStudioListings = async () => {
   const token = await getTokenFromServer();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/my-listings/${encodeURIComponent(user.email)}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/my-listings/${user.email}`,
     {
       cache: "no-store",
-      headers:{
-        authorization: `Bearer ${token}`,
-      }
+      // headers:{
+      //   authorization: `Bearer ${token}`,
+      // }
     }
   );
 
@@ -51,9 +51,9 @@ const MyStudioListings = async () => {
     throw new Error("Failed to fetch your studio listings.");
   }
 
-  const data: MyStudioListing[] = await res.json();
+  const data: IMyStudioDetails[] = await res.json();
 
-  console.log(data,"data from my listings");
+  console.log(data,"data from my listings=====================");
 
   const listings = Array.isArray(data) ? data : [];
 

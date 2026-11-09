@@ -15,14 +15,18 @@ type StudioData = {
   description: string;
   images: string[];
 };
-
+//roomsData: (IStudio & {source: "rooms" | "my-listings";})[];
 type StudioCardProps = {
-  roomData: StudioData;
+  roomData: StudioData & {source: "rooms" | "my-listings";};
 };
 
 export default function StudioCard({ roomData }: StudioCardProps) {
+  // console.log(roomData,"roomData from featured Cards")
   return (
-     <Link href={`/explore-studios/${roomData._id}`}>
+    //  <Link href={`/explore-studios/${roomData._id}`}>
+    <Link
+  href={`/${roomData.source === "rooms" ? "explore-studios" : "my-studio-listings"}/${roomData._id}`}
+>
     <div className="group overflow-hidden rounded-2xl border border-separator bg-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-transparent dark:bg-[#161e18]">
 
       <div className="relative aspect-[1.6/1] overflow-hidden">
@@ -42,7 +46,7 @@ export default function StudioCard({ roomData }: StudioCardProps) {
        
         <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-surface/95 px-3 py-1.5 text-xs font-bold text-foreground backdrop-blur-sm dark:bg-[#101812]/90 dark:text-white">
           <MdStar className="size-4 text-accent" />
-          {roomData.rating.toFixed(2)}
+          {roomData?.rating.toFixed(2)}
           <span className="font-normal text-muted">
             ({roomData.totalReviews})
           </span>

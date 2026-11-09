@@ -106,7 +106,7 @@ const StudioReviews = ({reviews,rating,totalReviews}: StudioReviewsProps) => {
                           key={starIndex}
                           size={15}
                           className={
-                            starIndex < Math.round(review.rating)
+                            starIndex < Math.round(review?.rating)
                               ? "text-success"
                               : "text-muted/30"
                           }
@@ -114,7 +114,7 @@ const StudioReviews = ({reviews,rating,totalReviews}: StudioReviewsProps) => {
                       ))}
 
                       <span className="ml-1 text-xs font-semibold">
-                        {review.rating.toFixed(1)}
+                        {review?.rating.toFixed(1)}
                       </span>
                     </div>
 

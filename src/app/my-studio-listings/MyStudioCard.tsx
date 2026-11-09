@@ -4,7 +4,7 @@ import { useState } from "react";
 import EditStudioModal from "./EditStudioModal";
 import Image from "next/image";
 import Link from "next/link";
-import { IStudio } from "@/Types/rooms";
+import { IMyStudioDetails, IStudio } from "@/Types/rooms";
 import {
   MdLocationOn,
   MdStar,
@@ -23,7 +23,7 @@ interface MyStudioCardProps {
 
 }
 
-const MyStudioCard = ({ studio }: MyStudioCardProps) => {
+const MyStudioCard = ({ studio }: {studio :IMyStudioDetails}) => {
 
     const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -111,18 +111,18 @@ const MyStudioCard = ({ studio }: MyStudioCardProps) => {
 
           <div>
             <p className="text-xs font-bold text-foreground">
-              {studio.totalReviews > 0
-                ? studio.rating.toFixed(2)
+              {studio.reviews.length > 0
+                ? studio?.reviews[0]?.rating.toFixed(2)
                 : "New"}
-              {studio.totalReviews > 0 && (
+              {/* {studio.reviews > 0 && (
                 <span className="ml-1 font-normal text-muted">
-                  ({studio.totalReviews})
+                  ({studio.reviews})
                 </span>
-              )}
+              )} */}
             </p>
 
             <p className="text-[10px] text-muted">
-              {studio.totalReviews > 0 ? "Reviews" : "No reviews yet"}
+              {studio.reviews.length > 0 ? "Reviews" : "No reviews yet"}
             </p>
           </div>
         </div>
@@ -161,7 +161,7 @@ const MyStudioCard = ({ studio }: MyStudioCardProps) => {
           </button>
 
           <Link
-            href={`/my-studio-listings/${studio.userEmail}`}
+            href={`/my-studio-listings/${studio._id}`}
             title="View studio"
             aria-label={`View ${studio.title}`}
             className="flex size-10 items-center justify-center rounded-xl bg-default text-muted transition hover:bg-accent/10 hover:text-foreground"

@@ -38,7 +38,7 @@ const PublishStudio = ({ formData }: PublishStudioProps) => {
 
     const { data: session } = useSession();
 
-const userName = session?.user.name;
+const name = session?.user.name;
 const userEmail = session?.user?.email;
 
 
@@ -102,8 +102,13 @@ const userEmail = session?.user?.email;
     try {
      const myListingData = {
   ...formData,
-  userName,
-  userEmail,
+  host : {
+    name,
+    userEmail,
+    verified : true,
+  },
+  rating: 0,
+  reviews: [],  
   createdAt: new Date().toISOString(),
 };
 

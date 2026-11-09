@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { MdClose, MdSave } from "react-icons/md";
-import { IStudio } from "@/Types/rooms";
+import { IMyStudioDetails, IStudio } from "@/Types/rooms";
 import StudioForm, { StudioFormData } from "@/components/studio/StudioForm";
 import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 interface EditStudioModalProps {
-  studio: IStudio;
+  studio: IMyStudioDetails;
   onClose: () => void;
 }
 

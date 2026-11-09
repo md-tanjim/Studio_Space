@@ -7,7 +7,7 @@
     import { TimePicker } from "@/components/reui/time-picker";
     import { MdArrowForward, MdCalendarMonth, MdClose, MdStar } from "react-icons/md";
     import { useSession } from "@/lib/auth-client";
-    import { IStudio } from "@/Types/rooms";
+    import { IMyStudioDetails, IStudio } from "@/Types/rooms";
     import { useRouter } from "next/navigation";
     import { toast } from "react-toastify";
 import { getTokenFromClient } from "@/lib/getTokenFromClient";
@@ -23,7 +23,7 @@ import { getTokenFromClient } from "@/lib/getTokenFromClient";
     ].join("-");
     };
 
-    const BookWorkplaceNow = ({ studio }: { studio: IStudio }) => {
+    const BookWorkplaceNow = ({ studio }: { studio: IStudio | IMyStudioDetails }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(getToday());
     const [crewSize, setCrewSize] = useState(1);
@@ -123,13 +123,13 @@ import { getTokenFromClient } from "@/lib/getTokenFromClient";
             <span className="text-muted">/ hour</span>
         </div>
 
-        <div className="flex items-center gap-1.5 text-sm font-semibold">
+        {/* <div className="flex items-center gap-1.5 text-sm font-semibold">
             <MdStar size={20} className="text-success" />
             <span>{studio.rating}</span>
             <span className="text-muted">
                 ({studio.totalReviews} reviews)
             </span>
-        </div>
+        </div> */}
     </div>
 
     {/* Pricing Details */}
@@ -425,7 +425,7 @@ import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
                     <div className="flex justify-between gap-3">
                         <span className="text-muted">Refundable Deposit:</span>
-                        <span>${studio.securityDeposit.toFixed(2)}</span>
+                        <span>${studio?.securityDeposit.toFixed(2)}</span>
                     </div>
 
                     <div className="flex items-center justify-between gap-3 border-t border-separator pt-3">
@@ -434,7 +434,7 @@ import { getTokenFromClient } from "@/lib/getTokenFromClient";
                         </span>
 
                         <span className="font-label text-xl font-extrabold text-success">
-                            ${(studio.hourlyRate * 4 + 25 + studio.securityDeposit).toFixed(2)}
+                            ${(studio.hourlyRate * 4 + 25 + studio?.securityDeposit).toFixed(2)}
                         </span>
                     </div>
                 </div>

@@ -9,9 +9,19 @@ import {
 } from "react-icons/md";
 import { IStudio } from "@/Types/rooms";
 import StudioCard from "@/components/home/FeaturedSecCards";
-import StudioResults from "@/components/studioDetailsPageComponents/StudioResultsPerPage";
+import StudioResults from "@/components/StudioResultsPerPage";
 
-const ExploreStudios = async () => {
+
+
+interface ExploreStudiosProps {
+  searchParams: Promise<{
+    category?: string;
+  }>;
+}
+
+
+const ExploreStudios = async ({ searchParams }: ExploreStudiosProps) => {
+  const { category } = await searchParams;
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-rooms`);
 
   if (!res.ok) {
@@ -28,7 +38,37 @@ const ExploreStudios = async () => {
 
   // const roomsData2: IStudio[] = await res2.json();
 
-  // const finalAllData = [...roomsData, ...roomsData2];
+
+  const res2 = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-listings`);
+
+if (!res2.ok) {
+  throw new Error("Failed to fetch studios");
+}
+
+// 1. Read raw text response instead of calling .json() blindly
+const rawText = await res2.text();
+
+// 2. Safe-check: If response is blank or whitespace, assign an empty array fallback
+const roomsData2: IStudio[] = rawText && rawText.trim() !== "" 
+  ? JSON.parse(rawText) 
+  : [];
+
+console.log("Successfully loaded listings:", roomsData2);
+
+
+
+
+  const finalAllData = [
+  ...roomsData.map((room) => ({
+    ...room,
+    source: "rooms" as const,
+  })),
+
+  ...roomsData2.map((studio) => ({
+    ...studio,
+    source: "my-listings" as const,
+  })),
+];
 
 
 
@@ -82,7 +122,9 @@ const ExploreStudios = async () => {
           </div>
         )} */}
 
-        <StudioResults roomsData={roomsData} />
+        <StudioResults roomsData={finalAllData}
+        initialCategory={category || "all"}
+        />
        
 
 

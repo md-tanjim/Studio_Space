@@ -38,9 +38,20 @@ export interface IMyStudioDetails {
   hourlyRate: number;
   securityDeposit: number;
   maxCapacity: number;
+  totalReviews: number;
   images: string[];
   amenities: string[];
-  userName: string;
-  userEmail: string;
+  host: {
+    name: string;
+    userEmail: string;
+    verified: boolean;
+  };
+  reviews: {
+    reviewerName: string;
+    reviewerPhoto: string;
+    rating: number;
+    date: string;
+    comment: string;
+  }[];
   createdAt: string;
 }
