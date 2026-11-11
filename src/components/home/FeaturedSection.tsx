@@ -14,6 +14,13 @@ const FeaturedSection = async()=> {
     const roomsData = await res.json();
     console.log(roomsData,"rooms data from Featured section");
 
+    const finalAllData = [
+  ...roomsData.map((room : IStudio) => ({
+    ...room,
+    source: "rooms" as const,
+  })),
+];
+
 //     const sortedRooms = roomsData.toSorted(
 //   (a , b) =>
 //     b.rating - a.rating
@@ -59,7 +66,7 @@ const FeaturedSection = async()=> {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
        
             {
-               roomsData.map((roomData : IStudio & {source: "rooms" | "my-listings";})=>{
+               finalAllData.map((roomData : IStudio & {source: "rooms" | "my-listings";})=>{
                 return (
                     <StudioCard key={roomData._id} roomData={roomData}></StudioCard>
                 )
